@@ -1,0 +1,37 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+
+def env = System.getProperty("env") == null ? System.getenv("ENVIRONMENT") : System.getProperty("env");
+
+println "Current Environment: " + env
+
+repositories {
+    mavenCentral()
+    mavenRepo urls: ["http://download.java.net/maven/2",
+            "http://maven.springframework.org/milestone",
+            "https://repository.jboss.org/nexus/content/groups/public/",
+            "http://mvnrepository.com/artifact"]
+}
+
+dependencies {
+    hibernate_version = '3.6.5.Final'
+    hibernate_validator_version = "4.2.0.Final"
+    hibernate = ["org.hibernate:hibernate-core:$hibernate_version",
+            "org.hibernate:hibernate-entitymanager:$hibernate_version",
+            "org.hibernate:hibernate-validator:$hibernate_validator_version"]
+
+    apache = ["org.apache.velocity:velocity:1.7",
+            "org.apache.velocity:velocity-tools:2.0",
+            "commons-logging:commons-logging:1.1.1+",
+            "commons-io:commons-io:2.0+",
+            "commons-codec:commons-codec:1.5"]
+
+    junit = ["junit:junit:4.8", "org.mockito:mockito-all:1.8.5", "org.hamcrest:hamcrest-all:1.1+"]
+    
+    h2_db = ["com.h2database:h2:1.3+"]
+
+    compile hibernate, apache, h2_db
+    testCompile junit, h2_db
+}
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
