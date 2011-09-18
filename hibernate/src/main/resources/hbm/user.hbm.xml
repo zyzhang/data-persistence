@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping
+        PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="zhang.abel.datapersistence.hibernate.domain.User" table="USER">
+        <id name="id" type="long">
+            <generator class="native"/>
+        </id>
+        <version name="version" type="long"/>
+        <property name="username" type="string" length="50" not-null="true" unique="true"/>
+        <property name="password" type="string" length="50" not-null="true"/>
+        <property name="email" type="string" length="50"/>
+    </class>
+</hibernate-mapping>
